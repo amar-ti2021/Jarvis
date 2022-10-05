@@ -7,7 +7,7 @@
   - Belajar membuat struktur dasar HTML
   - Belajar membuat heading
   - Belajar membuat paragraf
-  - Belajar menyisipkan gambar
+  - Belajar menyisipkan gamb
   - Belajar membuat form
 
 - [x] Belajar CSS
