@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class PustakawanController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = Librarian::all();
-        
-        if(count($data) == 0){
+
+        if (count($data) == 0) {
             return response()->json([
                 'message' => "Get All Resource",
                 'status' => 204,
@@ -21,6 +22,36 @@ class PustakawanController extends Controller
             'message' => "Get All Resource",
             'status' => 200,
             'data' => $data
+        ], 200);
+    }
+    public function store(Request $request)
+    {
+        $created = Librarian::create([
+            "nama" => $request->name,
+            "gender" => $request->gender,
+            "shift" => $request->shift,
+        ]);
+        return response()->json([
+            "message" => "Resources created successfully",
+            "status" => 201,
+            'data' => $created
+        ], 201);
+    }
+
+    public function show($id)
+    {
+        $librarian = Librarian::find($id);
+
+        if (!$librarian) {
+            return response()->json([
+                'message' => "Resource Not Found",
+                'status' => 404,
+            ], 404);
+        }
+        return response()->json([
+            'message' => "Get detail Resource",
+            'status' => 200,
+            'data' => $librarian
         ], 200);
     }
 }
