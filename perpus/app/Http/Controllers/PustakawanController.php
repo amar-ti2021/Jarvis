@@ -77,4 +77,41 @@ class PustakawanController extends Controller
             ], 200);
         }
     }
+    function destroy($id)
+    {
+        $librarian = Librarian::find($id);
+
+        if (!$librarian) {
+            return response()->json([
+                'message' => "Resource Not Found",
+                'status' => 404,
+            ], 404);
+        }
+
+        $deleted = $librarian->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'messsage' => "Resource deleted successfully",
+                'status' => 200
+            ], 200);
+        }
+    }
+
+    function search($name)
+    {
+        $librarians = Librarian::where('title', 'like', "%$name%")->get();
+
+        if (count($librarians)) {
+            return response()->json([
+                'message' => "Resource Empty",
+                'status' => 204,
+            ], 200);
+        }
+        return response()->json([
+            'message' => "Resource searched successfully",
+            'data' => $librarians,
+            'status' => 200,
+        ], 200);
+    }
 }

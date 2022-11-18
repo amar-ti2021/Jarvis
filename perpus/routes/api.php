@@ -25,9 +25,12 @@ Route::get('/pustakawan', [PustakawanController::class, 'index']);
 Route::get('/pustakawan/{id}', [PustakawanController::class, 'show']);
 Route::post('/pustakawan', [PustakawanController::class, 'store']);
 Route::put('/pustakawan/{id}', [PustakawanController::class, 'update']);
-
+Route::delete('/pustakawan/{id}', [PustakawanController::class, 'delete']);
+Route::get('/pustakawan/search/{name}', [PustakawanController::class], 'search');
 
 Route::get('/books', [BookController::class, 'index']);
 Route::post('/books', [BookController::class, 'store']);
 Route::get('/books/{id}', [BookController::class, 'show']);
 Route::put('/books/{id}', [BookController::class, 'update']);
+Route::delete('/books/{id}', [BookController::class, 'delete']);
+Route::get('/books/search/{title}', [BookController::class], 'search');

@@ -82,4 +82,41 @@ class BookController extends Controller
             ], 200);
         }
     }
+    function destroy($id)
+    {
+        $book = Book::find($id);
+
+        if (!$book) {
+            return response()->json([
+                'message' => "Resource Not Found",
+                'status' => 404,
+            ], 404);
+        }
+
+        $deleted = $book->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'messsage' => "Resource deleted successfully",
+                'status' => 200
+            ], 200);
+        }
+    }
+
+    function search($title)
+    {
+        $books = Book::where('title', 'like', $title . "%")->get();
+
+        if (count($books)) {
+            return response()->json([
+                'message' => "Resource Empty",
+                'status' => 204,
+            ], 200);
+        }
+        return response()->json([
+            'message' => "Resource searched successfully",
+            'data' => $books,
+            'status' => 200,
+        ], 200);
+    }
 }
